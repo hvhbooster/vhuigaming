@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VHIGAMING | ТОКСИЧНЫЙ СЕРВЕР</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%23ff9100" opacity="0.7"/><circle cx="16" cy="16" r="6" fill="%23ff0000"/></svg>'), auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* CS:GO Стиль заголовка */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            background: radial-gradient(circle, rgba(255, 145, 0, 0.1) 0%, rgba(0,0,0,0.8) 70%);
+            border-bottom: 4px solid #ff9100;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 145, 0, 0.05) 2px,
+                rgba(255, 145, 0, 0.05) 4px
+            );
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: 4.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: #ff9100;
+            text-shadow: 0 0 10px #ff9100, 
+                         0 0 20px #ff9100, 
+                         0 0 30px #ff0000,
+                         0 0 40px #ff0000;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Кнопки Discord и Telegram - БЕЗ ИКОНОК */
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            border: 2px solid white;
+            position: relative;
+            overflow: hidden;
+            min-width: 220px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .discord-btn {
+            background: linear-gradient(45deg, #5865F2, #7289DA);
+        }
+
+        .telegram-btn {
+            background: linear-gradient(45deg, #2AABEE, #229ED9);
+        }
+
+        .btn:hover {
+            transform: scale(1.03);
+            letter-spacing: 1.2px;
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .discord-btn:hover {
+            box-shadow: 0 0 15px #5865F2;
+        }
+
+        .telegram-btn:hover {
+            box-shadow: 0 0 15px #2AABEE;
+        }
+
+        /* Основной контент */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.85);
+            border: 2px solid #333;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(255, 145, 0, 0.2);
+            margin-bottom: 40px;
+        }
+
+        /* Описание */
+        .description {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 30px;
+            border-left: 4px solid #ff9100;
+            border-radius: 0 5px 5px 0;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .highlight {
+            color: #ff9100;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .warning {
+            color: #ff4444;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: blink 1s infinite;
+        }
+
+        .insult-text {
+            color: #ff4444;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+            font-style: italic;
+        }
+
+        .csgo-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: rgba(40, 40, 40, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            text-align: center;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: #ff9100;
+            box-shadow: 0 5px 15px rgba(255, 145, 0, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            color: #ff9100;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Бабушка анимация */
+        .grandma-section {
+            background: rgba(255, 68, 68, 0.1);
+            padding: 25px;
+            border: 2px solid #ff4444;
+            border-radius: 10px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rage-text {
+            color: #ff4444;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin-top: 15px;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+
+        /* Анимации */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff9100, 
+                             0 0 20px #ff9100, 
+                             0 0 30px #ff0000,
+                             0 0 40px #ff0000;
+            }
+            to {
+                text-shadow: 0 0 15px #ff9100, 
+                             0 0 25px #ff9100, 
+                             0 0 35px #ff0000,
+                             0 0 45px #ff0000;
+            }
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Эффект сканирования */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 0, 0.03) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: scanline 8s linear infinite;
+        }
+
+        /* Футер */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            margin-top: 40px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                font-size: 0.8rem;
+                padding: 12px 20px;
+                min-width: 200px;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .description {
+                font-size: 1rem;
+                padding: 20px;
+            }
+            
+            .csgo-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .insult-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title">VHIGAMING</h1>
+            <p class="subtitle">ТОКСИЧНЫЙ ДИСКОРД | БАБУШКИ В АДУ</p>
+            
+            <div class="buttons-container">
+                <a href="https://dsc.gg/vhuigaming" target="_blank" class="btn discord-btn">
+                    Зайти на VHUI GAMING
+                </a>
+                <a href="https://t.me/+1zjahPPklBBkZDYy" target="_blank" class="btn telegram-btn">
+                    ТГ КАНАЛ VHUI
+                </a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="description">
+                <p>Добро пожаловать на <span class="highlight">официальный портал VHIGAMING</span> — легендарное место, где собираются самые отвязные и бесстрашные игроки!</p><br>
+                
+                <p>У нас играют <span class="highlight">маленькие долбаебики</span> и прочие legends of gaming, которые:</p>
+                
+                <p class="insult-text">• Имеют аим как у Паркинсона после 10 литров энергетика</p>
+                <p class="insult-text">• Думают, что у них про игра, но это просто анимация смерти</p>
+                <p class="insult-text">• Трахают мамок в чате, пока их самих трахают в игре</p>
+                <p class="insult-text">• Играют на тостере 2007 года, но орут про лаги</p>
+                <p class="insult-text">• Кричат "КИБЕРСПОРТ" когда убивают бота</p>
+                <p>• <span class="warning">У КАЖДОГО УЧАСТНИКА В ВОЙСЕ УМИРАЕТ БАБУШКА</span> (и каждый раз её оскорбляют)</p><br>
+                
+                <div class="grandma-section">
+                    <p><span class="warning">ВАЖНОЕ ПРАВИЛО:</span> Если в войсе кто-то говорит "у меня бабушка умерла" — это сигнал начать оскорблять его бабушку максимально креативно! 🎯</p>
+                    <p class="rage-text">"ТВОЯ БАБУЛЬКА УМЕРЛА ОТ СТЫДА ЗА ТВОЙ АИМ!"</p>
+                </div>
+                
+                <p><span class="highlight">Присоединяйся, если не ссышь!</span> У нас тут адреналин, крики в дискорде и моменты, которые войдут в историю.</p>
+            </div>
+            
+            <div class="csgo-stats">
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Активность в голосовом</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Умерших бабушек</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">9999+</div>
+                    <div class="stat-label">Оскорблений бабушек</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Пидорасов в чате</div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>VHIGAMING Community © 2024 | Токсичный Discord | Бабушки в аду уже скучают</p>
+            <p>Disclaimer: Все бабушки вымышлены. Или нет. Твоя точно в аду.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const title = document.querySelector('.title');
+            setInterval(() => {
+                title.style.textShadow = `0 0 ${10 + Math.random() * 10}px #ff9100, 
+                                         0 0 ${20 + Math.random() * 10}px #ff9100, 
+                                         0 0 ${30 + Math.random() * 10}px #ff0000,
+                                         0 0 ${40 + Math.random() * 10}px #ff0000`;
+            }, 1000);
+
+            const stats = document.querySelectorAll('.stat-item');
+            stats.forEach(stat => {
+                stat.addEventListener('mouseenter', function() {
+                    const value = this.querySelector('.stat-value');
+                    value.style.transform = 'scale(1.2)';
+                    value.style.transition = 'transform 0.3s ease';
+                });
+                
+                stat.addEventListener('mouseleave', function() {
+                    const value = this.querySelector('.stat-value');
+                    value.style.transform = 'scale(1)';
+                });
+            });
+
+            const grandmaInsults = [
+                "ТВОЯ БАБУШКА ИГРАЛА В CS ЛУЧШЕ ТЕБЯ!",
+                "БАБУЛЬКА УМЕРЛА ОТ ТВОЕГО АИМА!",
+                "ТВОЯ БАБКА ДАЖЕ ПОСЛЕ СМЕРТИ ИГРАЕТ ЛУЧШЕ!",
+                "ОН УМЕР ЧТОБЫ НЕ СЛЫШАТЬ ТВОЙ ВОЙС!",
+                "БАБУЛЯ СДОХЛА ОТ СТЫДА ЗА ТЕБЯ!",
+                "ТВОЯ БАБУЛЬКА БЫЛА БЫ ЛУЧШЕ С АВП!",
+                "МОЯ БАБКА ИГРАЕТ ЛУЧШЕ, А ОНА В ГРОБУ!",
+                "БАБУШКА УМЕРЛА ОТ СКУКИ В ТВОЕМ ВОЙСЕ!",
+                "ТВОЯ БАБКА В РАЮ СМОТРИТ И ПЛАЧЕТ!",
+                "БАБУЛЯ В ГРОБУ ПЕРЕВОРАЧИВАЕТСЯ ОТ ТВОЕЙ ИГРЫ!",
+                "ТВОЙ ДЕД В ГРОБУ КРУТИТСЯ КАК ВЕНТИЛЯТОР!",
+                "БАБКА УМЕРЛА ЧТОБ НЕ ВИДЕТЬ ТВОЮ ИГРУ!",
+                "ТВОЯ ПРАБАБКА ПЛАЧЕТ В АДУ!",
+                "БАБУЛЬКА В РАЮ МОЛИТСЯ ЗА ТВОЙ АИМ!",
+                "ТВОЯ БАБКА ЛУЧШЕ БЫ ТЕБЯ В ДЕТСТВЕ ЗАДУШИЛА!"
+            ];
+
+            const rageText = document.querySelector('.rage-text');
+            let insultIndex = 0;
+            
+            setInterval(() => {
+                rageText.style.animation = 'shake 0.3s ease';
+                setTimeout(() => {
+                    rageText.textContent = `"${grandmaInsults[insultIndex]}"`;
+                    rageText.style.animation = '';
+                    insultIndex = (insultIndex + 1) % grandmaInsults.length;
+                }, 300);
+            }, 5000);
+
+            console.log('%cVHIGAMING ТОКСИЧНЫЙ СТАЙЛ', 'color: #ff9100; font-size: 20px; font-weight: bold; font-family: Courier;');
+            console.log('%cДобро пожаловать, долбаебик!', 'color: #fff; font-size: 14px; font-family: Courier;');
+        });
+
+        document.addEventListener('click', function(e) {
+            const bullet = document.createElement('div');
+            bullet.style.position = 'fixed';
+            bullet.style.left = e.clientX + 'px';
+            bullet.style.top = e.clientY + 'px';
+            bullet.style.width = '3px';
+            bullet.style.height = '3px';
+            bullet.style.background = '#ff9100';
+            bullet.style.borderRadius = '50%';
+            bullet.style.pointerEvents = 'none';
+            bullet.style.zIndex = '10000';
+            bullet.style.boxShadow = '0 0 8px #ff0000';
+            document.body.appendChild(bullet);
+            
+            setTimeout(() => {
+                bullet.remove();
+            }, 300);
+        });
+    </script>
+</body>
+</html>
